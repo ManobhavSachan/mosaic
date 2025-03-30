@@ -87,13 +87,13 @@ export default function PlayerControls() {
             <Button variant="ghost" size="icon" className="rounded-full" onClick={() => toggleFavorite(currentSong.id)}>
               <Heart className={cn("h-5 w-5", isFavorite(currentSong.id) ? "fill-black text-black" : "")} />
             </Button>
-            <span className="text-xl">{currentSong.likes}</span>
+            {/* <span className="text-xl">{currentSong.likes}</span> */}
           </div>
         </div>
 
         {/* Progress Bar */}
         <div className="flex items-center gap-4">
-          <span className="text-lg">{formatTime(currentTime)}</span>
+          <span className="text-lg w-[50px] text-left">{formatTime(currentTime)}</span>
           <div
             className="flex-1 h-2 bg-gray-300 rounded-full overflow-hidden cursor-pointer relative"
             onClick={handleProgressClick}
@@ -104,7 +104,7 @@ export default function PlayerControls() {
               style={{ width: `${progressPercentage}%` }}
             />
           </div>
-          <span className="text-lg">{formatTime(duration)}</span>
+          <span className="text-lg w-[50px] text-right">{formatTime(duration)}</span>
         </div>
       </div>
 
