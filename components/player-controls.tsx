@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import { useState } from "react"
 
 import { useRef, useEffect } from "react"
 import { Shuffle, SkipBack, Play, Pause, SkipForward, Repeat, Heart } from "lucide-react"
@@ -25,35 +26,29 @@ export default function PlayerControls() {
   const progressRef = useRef<HTMLDivElement | null>(null)
   const duration = currentSong?.duration || 215 // 3:35 in seconds
   const progressPercentage = (currentTime / duration) * 100
+  const [isShuffleActive, setIsShuffleActive] = useState(false);
+  const [isRepeatActive, setIsRepeatActive] = useState(false);
 
   useEffect(() => {
     if (audioRef.current) {
       if (isPlaying) {
-        audioRef.current.play().catch((error) => {
-          console.error("Audio playback failed:", error)
-        })
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((error) => {
+            console.error("Audio playback failed:", error);
+          });
+        }
       } else {
-        audioRef.current.pause()
+        audioRef.current.pause();
       }
     }
-  }, [isPlaying, currentSong])
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (isPlaying && currentTime < duration) {
-        const newTime = currentTime + 1;
-        setCurrentTime(newTime > duration ? duration : newTime);
-      }
-    }, 1000)
-
-    return () => clearInterval(interval)
-  }, [isPlaying, currentTime, duration, setCurrentTime])
+  }, [isPlaying, currentSong]);
 
   const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60)
-    const secs = Math.floor(seconds % 60)
-    return `${mins}:${secs.toString().padStart(2, "0")}`
-  }
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
+  };
 
   const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!progressRef.current || !currentSong) return
@@ -100,48 +95,14 @@ export default function PlayerControls() {
         <div className="flex items-center gap-4">
           <span className="text-lg">{formatTime(currentTime)}</span>
           <div
-            className="flex-1 h-6 bg-gray-200 rounded-full overflow-hidden cursor-pointer"
+            className="flex-1 h-2 bg-gray-300 rounded-full overflow-hidden cursor-pointer relative"
             onClick={handleProgressClick}
             ref={progressRef}
           >
-            <div className="relative w-full h-full">
-              {/* Static progress bar lines */}
-              <div className="absolute inset-0 flex items-center">
-                {Array.from({ length: 60 }).map((_, i) => {
-                  const height = 4 + Math.floor(Math.sin(i * 0.2) * 6 + 6)
-                  return (
-                    <div
-                      key={i}
-                      className="mx-0.5 bg-gray-300"
-                      style={{
-                        height: `${height}px`,
-                        width: "1.5px",
-                      }}
-                    ></div>
-                  )
-                })}
-              </div>
-
-              {/* Progress overlay */}
-              <div
-                className="absolute inset-0 flex items-center bg-gray-200"
-                style={{ width: `${progressPercentage}%` }}
-              >
-                {Array.from({ length: 60 }).map((_, i) => {
-                  const height = 4 + Math.floor(Math.sin(i * 0.2) * 6 + 6)
-                  return (
-                    <div
-                      key={i}
-                      className="mx-0.5 bg-black"
-                      style={{
-                        height: `${height}px`,
-                        width: "1.5px",
-                      }}
-                    ></div>
-                  )
-                })}
-              </div>
-            </div>
+            <div 
+              className="h-full bg-black rounded-full transition-all duration-100 ease-linear"
+              style={{ width: `${progressPercentage}%` }}
+            />
           </div>
           <span className="text-lg">{formatTime(duration)}</span>
         </div>
@@ -149,8 +110,14 @@ export default function PlayerControls() {
 
       {/* Controls */}
       <div className="flex justify-center items-center gap-12">
-        <Button variant="ghost" size="icon" className="h-12 w-12">
-          <Shuffle className="h-6 w-6" />
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="h-12 w-12 relative"
+          onClick={() => setIsShuffleActive(!isShuffleActive)}
+        >
+          <Shuffle className={cn("h-6 w-6", isShuffleActive ? "text-black" : "text-gray-500")} />
+          {isShuffleActive && <span className="absolute bottom-0 w-1.5 h-1.5 bg-black rounded-full" />}
         </Button>
         <Button variant="ghost" size="icon" className="h-12 w-12" onClick={skipToPrevious}>
           <SkipBack className="h-6 w-6" />
@@ -161,8 +128,14 @@ export default function PlayerControls() {
         <Button variant="ghost" size="icon" className="h-12 w-12" onClick={skipToNext}>
           <SkipForward className="h-6 w-6" />
         </Button>
-        <Button variant="ghost" size="icon" className="h-12 w-12">
-          <Repeat className="h-6 w-6" />
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="h-12 w-12 relative"
+          onClick={() => setIsRepeatActive(!isRepeatActive)}
+        >
+          <Repeat className={cn("h-6 w-6", isRepeatActive ? "text-black" : "text-gray-500")} />
+          {isRepeatActive && <span className="absolute bottom-0 w-1.5 h-1.5 bg-black rounded-full" />}
         </Button>
       </div>
 
@@ -174,9 +147,10 @@ export default function PlayerControls() {
         onEnded={() => togglePlayback()}
         onTimeUpdate={(e) => {
           if (audioRef.current) {
-            setCurrentTime(audioRef.current.currentTime)
+            setCurrentTime(audioRef.current.currentTime);
           }
         }}
+        preload="metadata"
       />
     </div>
   )
