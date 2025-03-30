@@ -70,7 +70,7 @@ export default function MusicPlayer() {
       <div className="max-w-6xl mx-auto w-full bg-gray-100 rounded-lg shadow-lg p-6 font-mono">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-2xl font-bold tracking-wider">MUSIC2D</h1>
+          <h1 className="text-2xl font-bold tracking-wider">MOSAIC</h1>
           <div className="relative flex-1 mx-8">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4" />
             <Input className="pl-10 bg-gray-200 border-gray-300 rounded-full" placeholder="Search for songs, artists" />

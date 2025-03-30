@@ -32,7 +32,7 @@ export const mockSongs: Song[] = [
     title: "The Suffering",
     artist: "Emily Bryan",
     album: "Daily Chaos",
-    duration: 215, // 3:35
+    duration: 15, // 3:35
     category: "Classic",
     likes: 392,
     audioUrl: "https://cdn.freesound.org/previews/612/612095_5674468-lq.mp3",
@@ -43,7 +43,7 @@ export const mockSongs: Song[] = [
     title: "Midnight Dreams",
     artist: "Ryan Poppin",
     album: "Simple Things",
-    duration: 183, // 3:03
+    duration: 15, // 3:03
     category: "90s",
     likes: 245,
     audioUrl: "https://cdn.freesound.org/previews/612/612095_5674468-lq.mp3",
@@ -54,7 +54,7 @@ export const mockSongs: Song[] = [
     title: "Lost in Time",
     artist: "Bryan Thomas",
     album: "Not so good",
-    duration: 197, // 3:17
+    duration: 15, // 3:17
     category: "New",
     likes: 178,
     audioUrl: "https://cdn.freesound.org/previews/612/612095_5674468-lq.mp3",
@@ -65,7 +65,7 @@ export const mockSongs: Song[] = [
     title: "Echoes of Yesterday",
     artist: "Emily Bryan",
     album: "Daily Chaos",
-    duration: 224, // 3:44
+    duration: 15, // 3:44
     category: "Classic",
     likes: 312,
     audioUrl: "https://cdn.freesound.org/previews/612/612095_5674468-lq.mp3",
@@ -76,7 +76,7 @@ export const mockSongs: Song[] = [
     title: "Neon Lights",
     artist: "Ryan Poppin",
     album: "Simple Things",
-    duration: 201, // 3:21
+    duration: 15, // 3:21
     category: "90s",
     likes: 267,
     audioUrl: "https://cdn.freesound.org/previews/612/612095_5674468-lq.mp3",
@@ -87,7 +87,7 @@ export const mockSongs: Song[] = [
     title: "Whispers in the Dark",
     artist: "Bryan Thomas",
     album: "Not so good",
-    duration: 189, // 3:09
+    duration: 15, // 3:09
     category: "Instrumental",
     likes: 156,
     audioUrl: "https://cdn.freesound.org/previews/612/612095_5674468-lq.mp3",

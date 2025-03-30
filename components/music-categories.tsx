@@ -29,9 +29,6 @@ export default function MusicCategories() {
             </Button>
           ))}
         </div>
-        <a href="#" className="text-sm underline whitespace-nowrap ml-2">
-          View all
-        </a>
       </div>
     </div>
   )
