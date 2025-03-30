@@ -24,12 +24,12 @@ export default function Sidebar() {
             key={item.view}
             variant="ghost"
             size="icon"
-            className={cn("rounded-full relative", currentView === item.view && "bg-gray-200")}
+            className={cn("rounded-full relative", currentView === item.view && "bg-black")}
             onClick={() => setCurrentView(item.view)}
             title={item.label}
           >
-            <Icon className="h-6 w-6" />
-            {currentView === item.view && <span className="absolute -right-1 -top-1 w-3 h-3 bg-black rounded-full" />}
+            <Icon className="h-6 w-6" color={currentView === item.view ? "white" : "gray"} />
+            {/* {currentView === item.view && <span className="absolute -right-1 -top-1 w-3 h-3 bg-black rounded-full" />} */}
           </Button>
         )
       })}

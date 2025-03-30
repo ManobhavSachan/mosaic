@@ -41,10 +41,8 @@ export default function PlayerControls() {
   useEffect(() => {
     const interval = setInterval(() => {
       if (isPlaying && currentTime < duration) {
-        setCurrentTime((prev) => {
-          const newTime = prev + 1
-          return newTime > duration ? duration : newTime
-        })
+        const newTime = currentTime + 1;
+        setCurrentTime(newTime > duration ? duration : newTime);
       }
     }, 1000)
 
@@ -92,7 +90,7 @@ export default function PlayerControls() {
           </div>
           <div className="ml-auto flex items-center gap-2">
             <Button variant="ghost" size="icon" className="rounded-full" onClick={() => toggleFavorite(currentSong.id)}>
-              <Heart className={cn("h-5 w-5", isFavorite(currentSong.id) ? "fill-red-500 text-red-500" : "")} />
+              <Heart className={cn("h-5 w-5", isFavorite(currentSong.id) ? "fill-black text-black" : "")} />
             </Button>
             <span className="text-xl">{currentSong.likes}</span>
           </div>
