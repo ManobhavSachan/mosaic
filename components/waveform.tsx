@@ -1,6 +1,12 @@
 "use client"
 
 import { useMusicPlayer } from "@/components/music-player"
+import { CSSProperties } from "react"
+
+// Define a type for the CSS variables
+interface CSSPropertiesWithVars extends CSSProperties {
+  '--base-height': string;
+}
 
 export default function Waveform() {
   const { isPlaying } = useMusicPlayer()
@@ -33,7 +39,7 @@ export default function Waveform() {
                 height: `${height * 50}%`,
                 animationDelay: `${i * 30}ms`,
                 opacity: 0.8,
-                ...(isPlaying && {'--base-height': `${height * 30}%`} as any),
+                ...(isPlaying && {'--base-height': `${height * 30}%`} as CSSPropertiesWithVars),
               }}
             ></div>
           ))}
@@ -49,7 +55,7 @@ export default function Waveform() {
                 height: `${height * 50}%`,
                 animationDelay: `${i * 30}ms`,
                 opacity: 0.8,
-                ...(isPlaying && {'--base-height': `${height * 30}%`} as any),
+                ...(isPlaying && {'--base-height': `${height * 30}%`} as CSSPropertiesWithVars),
               }}
             ></div>
           ))}
