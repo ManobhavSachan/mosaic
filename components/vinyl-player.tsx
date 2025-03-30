@@ -1,33 +1,55 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { useMusicPlayer } from "@/components/music-player"
+import { useEffect, useState } from "react";
+import { useMusicPlayer } from "@/components/music-player";
 
 export default function VinylPlayer() {
-  const { isPlaying, currentSong } = useMusicPlayer()
-  const [armPosition, setArmPosition] = useState("retracted") // "retracted" | "moving" | "playing"
+  const { isPlaying, currentSong } = useMusicPlayer();
+  const [armPosition, setArmPosition] = useState("retracted"); // "retracted" | "moving" | "playing"
+  const [isRotating, setIsRotating] = useState(false);
 
+  // Handle arm position based on play state
   useEffect(() => {
     if (isPlaying && armPosition === "retracted") {
-      setArmPosition("moving")
+      setArmPosition("moving");
       const timer = setTimeout(() => {
-        setArmPosition("playing")
-      }, 1000)
-      return () => clearTimeout(timer)
+        setArmPosition("playing");
+      }, 1000);
+      return () => clearTimeout(timer);
     } else if (!isPlaying && armPosition === "playing") {
-      setArmPosition("moving")
+      setArmPosition("moving");
       const timer = setTimeout(() => {
-        setArmPosition("retracted")
-      }, 1000)
-      return () => clearTimeout(timer)
+        setArmPosition("retracted");
+      }, 1000);
+      return () => clearTimeout(timer);
     }
-  }, [isPlaying, armPosition])
+  }, [isPlaying, armPosition]);
+
+  // Control disc rotation with a slight delay
+  useEffect(() => {
+    let rotationTimer: NodeJS.Timeout;
+
+    if (isPlaying) {
+      rotationTimer = setTimeout(() => {
+        setIsRotating(true);
+      }, 800); // Start rotation slightly before arm reaches playing position
+    } else {
+      // Let the disc slow down gradually when paused
+      rotationTimer = setTimeout(() => {
+        setIsRotating(false);
+      }, 200);
+    }
+
+    return () => clearTimeout(rotationTimer);
+  }, [isPlaying]);
 
   return (
     <div className="relative w-80 h-80 flex-shrink-0">
       <div className="absolute inset-0 bg-gray-300 rounded-lg shadow-md"></div>
       <div
-        className={`absolute inset-4 bg-gray-800 rounded-full ${armPosition === "playing" ? "animate-spin-slow" : ""}`}
+        className={`absolute inset-4 bg-gray-800 rounded-full transition-transform ${
+          isRotating ? "animate-spin-slow" : ""
+        }`}
         style={{ animationDuration: "3s" }}
       >
         {/* Vinyl grooves */}
@@ -54,17 +76,16 @@ export default function VinylPlayer() {
       {/* Tonearm */}
       <div className="absolute top-8 right-8 w-16 h-16">
         <div
-          className={`absolute w-2 h-16 bg-gray-400 rounded-t-full origin-bottom transform transition-all duration-1000 ease-in-out ${
+          className={`absolute w-2 h-24 translate-y-2 bg-gray-400 rounded-b-full origin-bottom transform transition-all duration-1000 ease-in-out ${
             armPosition === "retracted"
-              ? "-rotate-45 translate-x-6"
+              ? "translate-x-2"
               : armPosition === "moving"
-                ? "-rotate-20 translate-x-3"
-                : "rotate-0 translate-x-0"
+              ? "translate-x-2"
+              : "translate-x-2"
           }`}
         ></div>
         <div className="absolute top-0 left-0 w-6 h-6 bg-gray-500 rounded-full"></div>
       </div>
     </div>
-  )
+  );
 }
-
