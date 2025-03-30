@@ -62,10 +62,10 @@ export default function Header() {
         <Button
           variant="ghost"
           size="icon"
-          className="h-8 w-8 bg-gray-300 rounded-md flex items-center justify-center"
+          className="h-8 w-8 bg-black rounded-md flex items-center justify-center"
           onClick={() => setShowProfileModal(true)}
         >
-          <User className="h-5 w-5" />
+          <User className="h-5 w-5" color="white" />
         </Button>
       </div>
 
