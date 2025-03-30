@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useMusicPlayer } from "@/components/music-player";
 
 export default function VinylPlayer() {
-  const { isPlaying, currentSong } = useMusicPlayer();
+  const { isPlaying } = useMusicPlayer();
   const [armPosition, setArmPosition] = useState("retracted"); // "retracted" | "moving" | "playing"
   const [isRotating, setIsRotating] = useState(false);
 

@@ -145,7 +145,7 @@ export default function PlayerControls() {
         src={currentSong.audioUrl || "https://cdn.freesound.org/previews/612/612095_5674468-lq.mp3"}
         loop
         onEnded={() => togglePlayback()}
-        onTimeUpdate={(e) => {
+        onTimeUpdate={() => {
           if (audioRef.current) {
             setCurrentTime(audioRef.current.currentTime);
           }
