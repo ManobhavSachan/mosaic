@@ -28,7 +28,7 @@ export default function PlaylistSection() {
         {mockPlaylists.map((playlist) => (
           <div key={playlist.id} className="flex items-center gap-4">
             <Image
-              src={playlist.coverUrl || "/placeholder.svg?height=64&width=64"}
+              src="/cover.png"
               alt={playlist.title}
               width={64}
               height={64}

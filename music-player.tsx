@@ -207,13 +207,13 @@ export default function MusicPlayer() {
                 {/* Favorite Playlists */}
                 <div className="mb-4">
                   <h2 className="text-2xl font-bold tracking-wider mb-4 font-['VT323', 'monospace']">
-                    Favorite Playlists (4)
+                    Favorite Playlists (2)
                   </h2>
 
                   <div className="space-y-4">
                     <div className="flex items-center gap-4">
                       <Image
-                        src="/placeholder.svg?height=64&width=64"
+                        src="/cover.png"
                         alt="Playlist cover"
                         width={64}
                         height={64}
@@ -229,7 +229,7 @@ export default function MusicPlayer() {
                     </div>
                     <div className="flex items-center gap-4">
                       <Image
-                        src="/placeholder.svg?height=64&width=64"
+                        src="/cover.png"
                         alt="Playlist cover"
                         width={64}
                         height={64}

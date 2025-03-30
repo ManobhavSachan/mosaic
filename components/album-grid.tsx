@@ -25,7 +25,7 @@ export default function AlbumGrid() {
           onClick={() => handleAlbumClick(album.id)}
         >
           <Image
-            src={album.coverUrl || "/placeholder.svg"}
+            src="/cover.png"
             alt={album.title}
             width={200}
             height={200}

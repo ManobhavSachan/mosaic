@@ -27,7 +27,7 @@ export default function FavoritesView() {
             <div key={song.id} className="flex items-center gap-4 p-3 hover:bg-gray-200 rounded-lg">
               <div className="w-12 h-12 relative">
                 <Image
-                  src={song.coverUrl || "/placeholder.svg"}
+                  src="/cover.png"
                   alt={song.title}
                   width={48}
                   height={48}
